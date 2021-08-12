@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<title>WebGIS Flora dan Fauna</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/Lendongan3_1.js"></script>
+        <script src="data/Lendongan2_2.js"></script>
+        <script src="data/Lendongan1_3.js"></script>
+        <script src="data/BatasPettaSelatan_4.js"></script>
+        <script src="data/Lendongan4_5.js"></script>
+        <script src="data/Lendongan3_6.js"></script>
+        <script src="data/Lendongan2_7.js"></script>
+        <script src="data/Lendongan1_8.js"></script>
+        <script src="data/BatasPettaTimur_9.js"></script>
+        <script src="data/Lendongan3_10.js"></script>
+        <script src="data/Lendongan2_11.js"></script>
+        <script src="data/Lendongan1_12.js"></script>
+        <script src="data/BatasPettaBarat_13.js"></script>
+        <script src="data/FaunaPettaBarat_14.js"></script>
+        <script src="data/FloraPettaBarat_15.js"></script>
+        <script src="data/FaunaPettaSelatan_16.js"></script>
+        <script src="data/FloraPettaSelatan_17.js"></script>
+        <script src="data/FaunaPettaTimur_18.js"></script>
+        <script src="data/FloraPettaTimur_19.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:15
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 15,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_Lendongan3_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan3_1_0() {
+            return {
+                pane: 'pane_Lendongan3_1',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan3_1');
+        map.getPane('pane_Lendongan3_1').style.zIndex = 401;
+        map.getPane('pane_Lendongan3_1').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan3_1 = new L.geoJson(json_Lendongan3_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan3_1',
+            layerName: 'layer_Lendongan3_1',
+            pane: 'pane_Lendongan3_1',
+            onEachFeature: pop_Lendongan3_1,
+            style: style_Lendongan3_1_0,
+        });
+        bounds_group.addLayer(layer_Lendongan3_1);
+        map.addLayer(layer_Lendongan3_1);
+        function pop_Lendongan2_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan2_2_0() {
+            return {
+                pane: 'pane_Lendongan2_2',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan2_2');
+        map.getPane('pane_Lendongan2_2').style.zIndex = 402;
+        map.getPane('pane_Lendongan2_2').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan2_2 = new L.geoJson(json_Lendongan2_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan2_2',
+            layerName: 'layer_Lendongan2_2',
+            pane: 'pane_Lendongan2_2',
+            onEachFeature: pop_Lendongan2_2,
+            style: style_Lendongan2_2_0,
+        });
+        bounds_group.addLayer(layer_Lendongan2_2);
+        map.addLayer(layer_Lendongan2_2);
+        function pop_Lendongan1_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan1_3_0() {
+            return {
+                pane: 'pane_Lendongan1_3',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,158,23,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan1_3');
+        map.getPane('pane_Lendongan1_3').style.zIndex = 403;
+        map.getPane('pane_Lendongan1_3').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan1_3 = new L.geoJson(json_Lendongan1_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan1_3',
+            layerName: 'layer_Lendongan1_3',
+            pane: 'pane_Lendongan1_3',
+            onEachFeature: pop_Lendongan1_3,
+            style: style_Lendongan1_3_0,
+        });
+        bounds_group.addLayer(layer_Lendongan1_3);
+        map.addLayer(layer_Lendongan1_3);
+        function pop_BatasPettaSelatan_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BatasPettaSelatan_4_0() {
+            return {
+                pane: 'pane_BatasPettaSelatan_4',
+                opacity: 1,
+                color: 'rgba(255,252,49,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,139,143,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_BatasPettaSelatan_4');
+        map.getPane('pane_BatasPettaSelatan_4').style.zIndex = 404;
+        map.getPane('pane_BatasPettaSelatan_4').style['mix-blend-mode'] = 'normal';
+        var layer_BatasPettaSelatan_4 = new L.geoJson(json_BatasPettaSelatan_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_BatasPettaSelatan_4',
+            layerName: 'layer_BatasPettaSelatan_4',
+            pane: 'pane_BatasPettaSelatan_4',
+            onEachFeature: pop_BatasPettaSelatan_4,
+            style: style_BatasPettaSelatan_4_0,
+        });
+        bounds_group.addLayer(layer_BatasPettaSelatan_4);
+        map.addLayer(layer_BatasPettaSelatan_4);
+        function pop_Lendongan4_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan4_5_0() {
+            return {
+                pane: 'pane_Lendongan4_5',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,139,143,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan4_5');
+        map.getPane('pane_Lendongan4_5').style.zIndex = 405;
+        map.getPane('pane_Lendongan4_5').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan4_5 = new L.geoJson(json_Lendongan4_5, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan4_5',
+            layerName: 'layer_Lendongan4_5',
+            pane: 'pane_Lendongan4_5',
+            onEachFeature: pop_Lendongan4_5,
+            style: style_Lendongan4_5_0,
+        });
+        bounds_group.addLayer(layer_Lendongan4_5);
+        map.addLayer(layer_Lendongan4_5);
+        function pop_Lendongan3_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan3_6_0() {
+            return {
+                pane: 'pane_Lendongan3_6',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan3_6');
+        map.getPane('pane_Lendongan3_6').style.zIndex = 406;
+        map.getPane('pane_Lendongan3_6').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan3_6 = new L.geoJson(json_Lendongan3_6, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan3_6',
+            layerName: 'layer_Lendongan3_6',
+            pane: 'pane_Lendongan3_6',
+            onEachFeature: pop_Lendongan3_6,
+            style: style_Lendongan3_6_0,
+        });
+        bounds_group.addLayer(layer_Lendongan3_6);
+        map.addLayer(layer_Lendongan3_6);
+        function pop_Lendongan2_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan2_7_0() {
+            return {
+                pane: 'pane_Lendongan2_7',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,155,111,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan2_7');
+        map.getPane('pane_Lendongan2_7').style.zIndex = 407;
+        map.getPane('pane_Lendongan2_7').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan2_7 = new L.geoJson(json_Lendongan2_7, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan2_7',
+            layerName: 'layer_Lendongan2_7',
+            pane: 'pane_Lendongan2_7',
+            onEachFeature: pop_Lendongan2_7,
+            style: style_Lendongan2_7_0,
+        });
+        bounds_group.addLayer(layer_Lendongan2_7);
+        map.addLayer(layer_Lendongan2_7);
+        function pop_Lendongan1_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan1_8_0() {
+            return {
+                pane: 'pane_Lendongan1_8',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan1_8');
+        map.getPane('pane_Lendongan1_8').style.zIndex = 408;
+        map.getPane('pane_Lendongan1_8').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan1_8 = new L.geoJson(json_Lendongan1_8, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan1_8',
+            layerName: 'layer_Lendongan1_8',
+            pane: 'pane_Lendongan1_8',
+            onEachFeature: pop_Lendongan1_8,
+            style: style_Lendongan1_8_0,
+        });
+        bounds_group.addLayer(layer_Lendongan1_8);
+        map.addLayer(layer_Lendongan1_8);
+        function pop_BatasPettaTimur_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BatasPettaTimur_9_0() {
+            return {
+                pane: 'pane_BatasPettaTimur_9',
+                opacity: 1,
+                color: 'rgba(255,252,49,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,155,111,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_BatasPettaTimur_9');
+        map.getPane('pane_BatasPettaTimur_9').style.zIndex = 409;
+        map.getPane('pane_BatasPettaTimur_9').style['mix-blend-mode'] = 'normal';
+        var layer_BatasPettaTimur_9 = new L.geoJson(json_BatasPettaTimur_9, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_BatasPettaTimur_9',
+            layerName: 'layer_BatasPettaTimur_9',
+            pane: 'pane_BatasPettaTimur_9',
+            onEachFeature: pop_BatasPettaTimur_9,
+            style: style_BatasPettaTimur_9_0,
+        });
+        bounds_group.addLayer(layer_BatasPettaTimur_9);
+        map.addLayer(layer_BatasPettaTimur_9);
+        function pop_Lendongan3_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan3_10_0() {
+            return {
+                pane: 'pane_Lendongan3_10',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan3_10');
+        map.getPane('pane_Lendongan3_10').style.zIndex = 410;
+        map.getPane('pane_Lendongan3_10').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan3_10 = new L.geoJson(json_Lendongan3_10, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan3_10',
+            layerName: 'layer_Lendongan3_10',
+            pane: 'pane_Lendongan3_10',
+            onEachFeature: pop_Lendongan3_10,
+            style: style_Lendongan3_10_0,
+        });
+        bounds_group.addLayer(layer_Lendongan3_10);
+        map.addLayer(layer_Lendongan3_10);
+        function pop_Lendongan2_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan2_11_0() {
+            return {
+                pane: 'pane_Lendongan2_11',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,90,153,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan2_11');
+        map.getPane('pane_Lendongan2_11').style.zIndex = 411;
+        map.getPane('pane_Lendongan2_11').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan2_11 = new L.geoJson(json_Lendongan2_11, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan2_11',
+            layerName: 'layer_Lendongan2_11',
+            pane: 'pane_Lendongan2_11',
+            onEachFeature: pop_Lendongan2_11,
+            style: style_Lendongan2_11_0,
+        });
+        bounds_group.addLayer(layer_Lendongan2_11);
+        map.addLayer(layer_Lendongan2_11);
+        function pop_Lendongan1_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lendongan1_12_0() {
+            return {
+                pane: 'pane_Lendongan1_12',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Lendongan1_12');
+        map.getPane('pane_Lendongan1_12').style.zIndex = 412;
+        map.getPane('pane_Lendongan1_12').style['mix-blend-mode'] = 'normal';
+        var layer_Lendongan1_12 = new L.geoJson(json_Lendongan1_12, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Lendongan1_12',
+            layerName: 'layer_Lendongan1_12',
+            pane: 'pane_Lendongan1_12',
+            onEachFeature: pop_Lendongan1_12,
+            style: style_Lendongan1_12_0,
+        });
+        bounds_group.addLayer(layer_Lendongan1_12);
+        map.addLayer(layer_Lendongan1_12);
+        function pop_BatasPettaBarat_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? autolinker.link(feature.properties['SHAPE_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BatasPettaBarat_13_0() {
+            return {
+                pane: 'pane_BatasPettaBarat_13',
+                opacity: 1,
+                color: 'rgba(255,252,49,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_BatasPettaBarat_13');
+        map.getPane('pane_BatasPettaBarat_13').style.zIndex = 413;
+        map.getPane('pane_BatasPettaBarat_13').style['mix-blend-mode'] = 'normal';
+        var layer_BatasPettaBarat_13 = new L.geoJson(json_BatasPettaBarat_13, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_BatasPettaBarat_13',
+            layerName: 'layer_BatasPettaBarat_13',
+            pane: 'pane_BatasPettaBarat_13',
+            onEachFeature: pop_BatasPettaBarat_13,
+            style: style_BatasPettaBarat_13_0,
+        });
+        bounds_group.addLayer(layer_BatasPettaBarat_13);
+        map.addLayer(layer_BatasPettaBarat_13);
+        function pop_FaunaPettaBarat_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><h3 style="text-align:center">' + (feature.properties['Klasifikas'] !== null ? autolinker.link(feature.properties['Klasifikas'].toLocaleString()) : '') + '</h3></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><img width="305" src="images/' + (feature.properties['Gambar'] !== null ? autolinker.link(feature.properties['Gambar'].toLocaleString()) : '') + '"></td>\
+                    </tr>\
+                    <tr>\
+						<td colspan="2"><b style="font-size:250%;">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</b></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><i style="font-size:130%;">' + (feature.properties['Latin'] !== null ? autolinker.link(feature.properties['Latin'].toLocaleString()) : '') + '</i></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Sumber :<br />' + (feature.properties['Sumber'] !== null ? autolinker.link(feature.properties['Sumber'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FaunaPettaBarat_14_0() {
+            return {
+                pane: 'pane_FaunaPettaBarat_14',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_FaunaPettaBarat_14');
+        map.getPane('pane_FaunaPettaBarat_14').style.zIndex = 414;
+        map.getPane('pane_FaunaPettaBarat_14').style['mix-blend-mode'] = 'normal';
+        var layer_FaunaPettaBarat_14 = new L.geoJson(json_FaunaPettaBarat_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FaunaPettaBarat_14',
+            layerName: 'layer_FaunaPettaBarat_14',
+            pane: 'pane_FaunaPettaBarat_14',
+            onEachFeature: pop_FaunaPettaBarat_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_FaunaPettaBarat_14_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_FaunaPettaBarat_14);
+        map.addLayer(layer_FaunaPettaBarat_14);
+        function pop_FloraPettaBarat_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><h3 style="text-align:center">' + (feature.properties['Klasifikas'] !== null ? autolinker.link(feature.properties['Klasifikas'].toLocaleString()) : '') + '</h3></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><img width="305" src="images/' + (feature.properties['Gambar'] !== null ? autolinker.link(feature.properties['Gambar'].toLocaleString()) : '') + '"></td>\
+                    </tr>\
+                    <tr>\
+						<td colspan="2"><b style="font-size:250%;">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</b></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><i style="font-size:130%;">' + (feature.properties['Latin'] !== null ? autolinker.link(feature.properties['Latin'].toLocaleString()) : '') + '</i></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Sumber :<br />' + (feature.properties['Sumber'] !== null ? autolinker.link(feature.properties['Sumber'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FloraPettaBarat_15_0() {
+            return {
+                pane: 'pane_FloraPettaBarat_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,206,227,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_FloraPettaBarat_15');
+        map.getPane('pane_FloraPettaBarat_15').style.zIndex = 415;
+        map.getPane('pane_FloraPettaBarat_15').style['mix-blend-mode'] = 'normal';
+        var layer_FloraPettaBarat_15 = new L.geoJson(json_FloraPettaBarat_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FloraPettaBarat_15',
+            layerName: 'layer_FloraPettaBarat_15',
+            pane: 'pane_FloraPettaBarat_15',
+            onEachFeature: pop_FloraPettaBarat_15,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_FloraPettaBarat_15_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_FloraPettaBarat_15);
+        map.addLayer(layer_FloraPettaBarat_15);
+        function pop_FaunaPettaSelatan_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><h3 style="text-align:center">' + (feature.properties['Klasifikas'] !== null ? autolinker.link(feature.properties['Klasifikas'].toLocaleString()) : '') + '</h3></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><img width="305" src="images/' + (feature.properties['Gambar'] !== null ? autolinker.link(feature.properties['Gambar'].toLocaleString()) : '') + '"></td>\
+                    </tr>\
+                    <tr>\
+						<td colspan="2"><b style="font-size:250%;">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</b></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><i style="font-size:130%;">' + (feature.properties['Latin'] !== null ? autolinker.link(feature.properties['Latin'].toLocaleString()) : '') + '</i></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Sumber :<br />' + (feature.properties['Sumber'] !== null ? autolinker.link(feature.properties['Sumber'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FaunaPettaSelatan_16_0() {
+            return {
+                pane: 'pane_FaunaPettaSelatan_16',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,207,80,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_FaunaPettaSelatan_16');
+        map.getPane('pane_FaunaPettaSelatan_16').style.zIndex = 416;
+        map.getPane('pane_FaunaPettaSelatan_16').style['mix-blend-mode'] = 'normal';
+        var layer_FaunaPettaSelatan_16 = new L.geoJson(json_FaunaPettaSelatan_16, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FaunaPettaSelatan_16',
+            layerName: 'layer_FaunaPettaSelatan_16',
+            pane: 'pane_FaunaPettaSelatan_16',
+            onEachFeature: pop_FaunaPettaSelatan_16,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_FaunaPettaSelatan_16_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_FaunaPettaSelatan_16);
+        map.addLayer(layer_FaunaPettaSelatan_16);
+        function pop_FloraPettaSelatan_17(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><h3 style="text-align:center">' + (feature.properties['Klasifikas'] !== null ? autolinker.link(feature.properties['Klasifikas'].toLocaleString()) : '') + '</h3></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><img width="305" src="images/' + (feature.properties['Gambar'] !== null ? autolinker.link(feature.properties['Gambar'].toLocaleString()) : '') + '"></td>\
+                    </tr>\
+                    <tr>\
+						<td colspan="2"><b style="font-size:250%;">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</b></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><i style="font-size:130%;">' + (feature.properties['Latin'] !== null ? autolinker.link(feature.properties['Latin'].toLocaleString()) : '') + '</i></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Sumber :<br />' + (feature.properties['Sumber'] !== null ? autolinker.link(feature.properties['Sumber'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FloraPettaSelatan_17_0() {
+            return {
+                pane: 'pane_FloraPettaSelatan_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_FloraPettaSelatan_17');
+        map.getPane('pane_FloraPettaSelatan_17').style.zIndex = 417;
+        map.getPane('pane_FloraPettaSelatan_17').style['mix-blend-mode'] = 'normal';
+        var layer_FloraPettaSelatan_17 = new L.geoJson(json_FloraPettaSelatan_17, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FloraPettaSelatan_17',
+            layerName: 'layer_FloraPettaSelatan_17',
+            pane: 'pane_FloraPettaSelatan_17',
+            onEachFeature: pop_FloraPettaSelatan_17,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_FloraPettaSelatan_17_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_FloraPettaSelatan_17);
+        map.addLayer(layer_FloraPettaSelatan_17);
+        function pop_FaunaPettaTimur_18(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><h3 style="text-align:center">' + (feature.properties['Klasifikas'] !== null ? autolinker.link(feature.properties['Klasifikas'].toLocaleString()) : '') + '</h3></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><img width="305" src="images/' + (feature.properties['Gambar'] !== null ? autolinker.link(feature.properties['Gambar'].toLocaleString()) : '') + '"></td>\
+                    </tr>\
+                    <tr>\
+						<td colspan="2"><b style="font-size:250%;">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</b></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><i style="font-size:130%;">' + (feature.properties['Latin'] !== null ? autolinker.link(feature.properties['Latin'].toLocaleString()) : '') + '</i></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Sumber :<br />' + (feature.properties['Sumber'] !== null ? autolinker.link(feature.properties['Sumber'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FaunaPettaTimur_18_0() {
+            return {
+                pane: 'pane_FaunaPettaTimur_18',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,125,183,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_FaunaPettaTimur_18');
+        map.getPane('pane_FaunaPettaTimur_18').style.zIndex = 418;
+        map.getPane('pane_FaunaPettaTimur_18').style['mix-blend-mode'] = 'normal';
+        var layer_FaunaPettaTimur_18 = new L.geoJson(json_FaunaPettaTimur_18, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FaunaPettaTimur_18',
+            layerName: 'layer_FaunaPettaTimur_18',
+            pane: 'pane_FaunaPettaTimur_18',
+            onEachFeature: pop_FaunaPettaTimur_18,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_FaunaPettaTimur_18_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_FaunaPettaTimur_18);
+        map.addLayer(layer_FaunaPettaTimur_18);
+        function pop_FloraPettaTimur_19(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><h3 style="text-align:center">' + (feature.properties['Klasifikas'] !== null ? autolinker.link(feature.properties['Klasifikas'].toLocaleString()) : '') + '</h3></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><img width="305" src="images/' + (feature.properties['Gambar'] !== null ? autolinker.link(feature.properties['Gambar'].toLocaleString()) : '') + '"></td>\
+                    </tr>\
+                    <tr>\
+						<td colspan="2"><b style="font-size:250%;">' + (feature.properties['Nama'] !== null ? autolinker.link(feature.properties['Nama'].toLocaleString()) : '') + '</b></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><i style="font-size:130%;">' + (feature.properties['Latin'] !== null ? autolinker.link(feature.properties['Latin'].toLocaleString()) : '') + '</i></td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Sumber :<br />' + (feature.properties['Sumber'] !== null ? autolinker.link(feature.properties['Sumber'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FloraPettaTimur_19_0() {
+            return {
+                pane: 'pane_FloraPettaTimur_19',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,158,23,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_FloraPettaTimur_19');
+        map.getPane('pane_FloraPettaTimur_19').style.zIndex = 419;
+        map.getPane('pane_FloraPettaTimur_19').style['mix-blend-mode'] = 'normal';
+        var layer_FloraPettaTimur_19 = new L.geoJson(json_FloraPettaTimur_19, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_FloraPettaTimur_19',
+            layerName: 'layer_FloraPettaTimur_19',
+            pane: 'pane_FloraPettaTimur_19',
+            onEachFeature: pop_FloraPettaTimur_19,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_FloraPettaTimur_19_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_FloraPettaTimur_19);
+        map.addLayer(layer_FloraPettaTimur_19);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/FloraPettaTimur_19.png" /> Flora Petta Timur': layer_FloraPettaTimur_19,'<img src="legend/FaunaPettaTimur_18.png" /> Fauna Petta Timur': layer_FaunaPettaTimur_18,'<img src="legend/FloraPettaSelatan_17.png" /> Flora Petta Selatan': layer_FloraPettaSelatan_17,'<img src="legend/FaunaPettaSelatan_16.png" /> Fauna Petta Selatan': layer_FaunaPettaSelatan_16,'<img src="legend/FloraPettaBarat_15.png" /> Flora Petta Barat': layer_FloraPettaBarat_15,'<img src="legend/FaunaPettaBarat_14.png" /> Fauna Petta Barat': layer_FaunaPettaBarat_14,'<img src="legend/BatasPettaBarat_13.png" /> Batas Petta Barat': layer_BatasPettaBarat_13,'<img src="legend/Lendongan1_12.png" /> Lendongan 1': layer_Lendongan1_12,'<img src="legend/Lendongan2_11.png" /> Lendongan 2': layer_Lendongan2_11,'<img src="legend/Lendongan3_10.png" /> Lendongan 3': layer_Lendongan3_10,'<img src="legend/BatasPettaTimur_9.png" /> Batas Petta Timur': layer_BatasPettaTimur_9,'<img src="legend/Lendongan1_8.png" /> Lendongan 1': layer_Lendongan1_8,'<img src="legend/Lendongan2_7.png" /> Lendongan 2': layer_Lendongan2_7,'<img src="legend/Lendongan3_6.png" /> Lendongan 3': layer_Lendongan3_6,'<img src="legend/Lendongan4_5.png" /> Lendongan 4': layer_Lendongan4_5,'<img src="legend/BatasPettaSelatan_4.png" /> Batas Petta Selatan': layer_BatasPettaSelatan_4,'<img src="legend/Lendongan1_3.png" /> Lendongan 1': layer_Lendongan1_3,'<img src="legend/Lendongan2_2.png" /> Lendongan 2': layer_Lendongan2_2,'<img src="legend/Lendongan3_1.png" /> Lendongan 3': layer_Lendongan3_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_BatasPettaSelatan_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Nama'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Nama']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BatasPettaSelatan_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_BatasPettaTimur_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Nama'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Nama']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BatasPettaTimur_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_BatasPettaBarat_13.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Nama'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Nama']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BatasPettaBarat_13'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_BatasPettaSelatan_4,layer_BatasPettaTimur_9,layer_BatasPettaBarat_13]);
+        map.on("zoomend", function(){
+            resetLabels([layer_BatasPettaSelatan_4,layer_BatasPettaTimur_9,layer_BatasPettaBarat_13]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_BatasPettaSelatan_4,layer_BatasPettaTimur_9,layer_BatasPettaBarat_13]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_BatasPettaSelatan_4,layer_BatasPettaTimur_9,layer_BatasPettaBarat_13]);
+        });
+        </script>
+    </body>
+</html>
